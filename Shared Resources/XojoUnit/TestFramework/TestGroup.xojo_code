@@ -289,6 +289,10 @@ Protected Class TestGroup
 		    
 		    EndTimer
 		    
+		    if CurrentClone.PauseBetweenTestsInMs > 0 then
+		      App.SleepCurrentThread(CurrentClone.PauseBetweenTestsInMs)
+		    end if
+		    
 		    If err IsA Object Then
 		      
 		      If Not RaiseEvent UnhandledException(err, result.TestName) Then
@@ -525,6 +529,13 @@ Protected Class TestGroup
 		PassedTestCount As Integer
 	#tag EndComputedProperty
 
+	#tag Property, Flags = &h0
+		#tag Note
+			1
+		#tag EndNote
+		PauseBetweenTestsInMs As Integer
+	#tag EndProperty
+
 	#tag ComputedProperty, Flags = &h0
 		#tag Getter
 			Get
@@ -656,6 +667,11 @@ Protected Class TestGroup
 			Type="Integer"
 		#tag EndViewProperty
 		#tag ViewProperty
+			Name="PauseBetweenTestsInMs"
+			Group="Behavior"
+			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
 			Name="RunTestCount"
 			Group="Behavior"
 			Type="Integer"
@@ -664,6 +680,11 @@ Protected Class TestGroup
 			Name="SkippedTestCount"
 			Group="Behavior"
 			Type="Integer"
+		#tag EndViewProperty
+		#tag ViewProperty
+			Name="StopTestOnFail"
+			Group="Behavior"
+			Type="Boolean"
 		#tag EndViewProperty
 		#tag ViewProperty
 			Name="Super"
